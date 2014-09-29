@@ -18,7 +18,7 @@ class UserController extends BaseController {
 	}
 
 	public function create() {
-		//if (Auth::check()) return Redirect::to('/');
+		if (Auth::check()) return Redirect::to('/');
 		return View::make('users.create');
 
 	}
@@ -34,14 +34,12 @@ class UserController extends BaseController {
 			return Redirect::to('/');
 		} 
 			return Redirect::back()->withInput()->with("errMessage", "Invalid username or password");
-
-		//return 'Failed';
 	}
 
 
 	public function destroy() {
 		Auth::logout();
-		return Redirect::to('/');
+		return Redirect::to('login');
 	}
 
 }

@@ -33,10 +33,11 @@
                         <h5>Twitter Clone</h5>
                     </div>
                     <div class="link-top-container">
-                        <p><a href="#">Sign In</a> or <a href="#">Log Out</a></p>
-                    <?php 
-                    
-                    ?>
+                        
+                   
+                        @yield('link-top-right')
+
+                       
                     </div>
                     <div class="clear"></div>
 

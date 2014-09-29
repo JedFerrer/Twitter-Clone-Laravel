@@ -1,26 +1,52 @@
 @extends('layouts.default')
 @section('content')
 	 <div class="form-container">
-       <!--  <form method="post"  role="form" action=""> -->
+
         {{ Form::open(['url' => 'user']) }}
+
+        	@if ($errors->all())
+		     	<div class="bg-danger validation-errors">
+		        	<p>The following errors are encountered</p>
+		            <ul>
+						@foreach ($errors->all() as $error)
+						    <li>{{ $error }}</li>
+						@endforeach		      
+		            </ul>
+		        </div>
+	    	 @endif
+
+			@if (Session::has('message'))
+	     		<div class="alert alert-success" role="alert">
+			    	<p> {{ Session::get('message') }} </p>
+			 	</div>
+			@endif
+
+			@if (Session::has('errMessage'))
+	     		<div class="alert alert-danger" role="alert">
+			    	<p> {{ Session::get('errMessage') }} </p>
+			 	</div>
+			@endif
+
+			<div class="form-header-top-container">
+        		<h3><strong>User Login</strong></h3>
+	     	</div>
+
             <div class="form-group">
-                <!-- <label for="exampleInputEmail1">Email address</label>
-                <input type="email" name="email" class="form-control" id="exampleInputEmail1" value="" placeholder="Enter your Email" > -->
             	{{ Form::label('email', 'E-mail address:') }}
 	 			{{ Form::email('email', $value = null, array('placeholder' => 'E-mail Address', 'class' => 'form-control')) }}
             </div>
+
             <div class="form-group">
-                <!-- <label for="exampleInputPassword1">Password</label>
-                <input type="password" name="pass" class="form-control" id="exampleInputPassword1" placeholder="Password" > -->
             	{{ Form::label('password', 'Password:') }}
 	 			{{ Form::password('password', array('placeholder' => 'Password', 'class' => 'form-control')) }}
             </div>
-            <!-- <button type="submit" class="btn btn-primary">Sign In</button> -->
-            {{ Form::submit('Sign In', array('class' => 'btn btn-primary')) }}
+
+            {{ Form::submit('Sign In', array('class' => 'btn btn-success')) }}
             </br></br> 
-            <p>New to this? <a href="#">Sign Up now</a></p>
+            <p>New to this? {{ link_to("signup", 'Sign Up now') }} </p>
+
 
         {{ Form::close() }}
-       <!--  </form> -->
+
     </div>
 @stop
