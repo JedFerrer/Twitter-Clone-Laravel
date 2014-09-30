@@ -1,5 +1,9 @@
 @extends('layouts.default')
 
+@section('link-top-left')
+	<h5>Twitter Clone</h5>
+@stop
+
 @section('link-top-right')
         <p> {{ link_to("login", 'Sign In') }} </p> 
 @stop

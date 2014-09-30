@@ -29,8 +29,7 @@
                 <div class="main-content-centered">
                     
                     <div class="logo-container">
-                       
-                        <h5>Twitter Clone</h5>
+                        @yield('link-top-left')
                     </div>
                     <div class="link-top-container">
                         

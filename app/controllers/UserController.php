@@ -3,7 +3,7 @@
 class UserController extends BaseController {
 
 	protected $user;
-	public static $userInfo;
+	//public static $userInfo;
 
 	public function __construct(User $user) {
 		$this->user = $user;
@@ -25,7 +25,7 @@ class UserController extends BaseController {
 
 	public function store() {
 
-		if (!$this->user->isValid($input = Input::all())) {
+		if (!$this->user->isValid($input = Input::all(), 'SignIn')) {
 			return Redirect::back()->withInput()->withErrors($this->user->errors);
 		}
 

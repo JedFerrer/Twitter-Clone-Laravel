@@ -2,10 +2,10 @@
 
 class RegistrationController extends BaseController {
 
-	protected $register;
+	protected $user;
 
-	public function __construct(Register $register) {
-		$this->register = $register;
+	public function __construct(User $user) {
+		$this->user = $user;
 	}
 
 	public function index() {
@@ -22,11 +22,11 @@ class RegistrationController extends BaseController {
 	}
 
 	public function store() {
-		if (!$this->register->isValid($input = Input::all())) {
-			return Redirect::back()->withInput()->withErrors($this->register->errors);
+		if (!$this->user->isValid($input = Input::all(), 'Registration')) {
+			return Redirect::back()->withInput()->withErrors($this->user->errors);
 		}
 
-		$this->register->create(array(
+		$this->user->create(array(
 			'name' => Input::get('name'),
 			'email' => Input::get('email'),
 			'password' => Hash::make(Input::get('password'))

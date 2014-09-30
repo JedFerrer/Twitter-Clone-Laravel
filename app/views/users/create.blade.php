@@ -1,4 +1,9 @@
 @extends('layouts.default')
+
+@section('link-top-left')
+	<h5>Twitter Clone</h5>
+@stop
+
 @section('content')
 	 <div class="form-container">
 
