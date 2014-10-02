@@ -3,43 +3,29 @@
 class UserController extends BaseController {
 
 	protected $user;
-	//public static $userInfo;
 
 	public function __construct(User $user) {
 		$this->user = $user;
 	}
 
-	public function index() {
-
-	}
-
-	public function show($id) {
-
-	}
-
 	public function create() {
 		if (Auth::check()) return Redirect::to('/');
-		return View::make('users.create');
-
+		return View::make('registration.create');
 	}
 
 	public function store() {
-
-		if (!$this->user->isValid($input = Input::all(), 'SignIn')) {
+		if (!$this->user->isValid($input = Input::all(), 'Registration')) {
 			return Redirect::back()->withInput()->withErrors($this->user->errors);
 		}
 
-		if (Auth::attempt(array('email' => Input::get('email'), 'password' => Input::get('password'))))
-		{
-			return Redirect::to('/');
-		} 
-			return Redirect::back()->withInput()->with("errMessage", "Invalid username or password");
-	}
+		$this->user->create(array(
+			'name' => Input::get('name'),
+			'nickname' => Input::get('nickname'),
+			'email' => Input::get('email'),
+			'password' => Hash::make(Input::get('password'))
+		));
 
-
-	public function destroy() {
-		Auth::logout();
-		return Redirect::to('login');
+		return Redirect::to('/login')->with("message", "You have been registered and can now log in!");
 	}
 
 }

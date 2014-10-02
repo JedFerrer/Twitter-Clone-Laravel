@@ -7,7 +7,7 @@
 @section('content')
 	 <div class="form-container">
 
-        {{ Form::open(['url' => 'user']) }}
+        {{ Form::open(['url' => 'session']) }}
 
         	@if ($errors->all())
 		     	<div class="bg-danger validation-errors">

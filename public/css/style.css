@@ -242,3 +242,46 @@ body {
 
 
 
+
+.user-info-container, .tweets-container {
+	width: 610px;
+	margin: auto;
+	height: auto;
+}
+.user-info-container .btn-success {
+	float: right;
+}
+
+.user-info-container .list-group-item {
+	padding: 8px 15px;
+}
+
+.tweets-container .list-group-item {
+	padding: 20px 15px;
+}
+
+
+.user-info-container .alert {
+	padding: 3px;
+	margin-bottom: 0;
+}
+
+.user-name {
+	text-align: center;
+	font-size: 12pt;
+	font-weight: 700;
+}
+
+#header-user-pic {
+	float: left;
+	width: 250px;
+}
+
+#header-user-info {
+	width: 350px;
+	float: left;
+	margin-left: 20px;
+}
+
+
+

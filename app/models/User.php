@@ -9,7 +9,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
 	use UserTrait, RemindableTrait;
 	public $timestamps = false;
-	protected $fillable = ['name','email','password'];
+	protected $fillable = ['name','nickname','email','password'];
 	protected $hidden = array('password', 'remember_token');
 	protected $table = 'users';
 
@@ -20,6 +20,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
 	public static $registrationRules = [
 		'name' => 'required', 
+		'nickname' => 'required|alpha_num|max:10|unique:users,nickname',
 		'email' => 'required|email|unique:users,email',
 		'password' => 'required',
 		'rpass' => 'required|same:password'
@@ -45,5 +46,10 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		$this->errors = $validation->messages();
 		return false;
 	}
+
+	public function tweets()
+    {
+        return $this->hasMany('Tweet');
+    }
 
 }

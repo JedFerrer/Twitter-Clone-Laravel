@@ -27,11 +27,17 @@
 	        </div>
 	     @endif
 
-		{{ Form::open(['url' => 'registration']) }}
+		{{ Form::open(['url' => 'users']) }}
 
 			<div class="form-group">
 				{{ Form::label('name', 'Full Name:') }}
 				{{ Form::text('name', $value = null, array('placeholder' => 'Name', 'class'=> 'form-control', 'autofocus' => 'autofocus' )) }}
+	 			
+	 		</div>
+
+	 		<div class="form-group">
+				{{ Form::label('nickname', 'Nickname:') }}
+				{{ Form::text('nickname', $value = null, array('placeholder' => 'Nickname', 'class'=> 'form-control', 'maxlength'=> '10' )) }}
 	 			
 	 		</div>
 
