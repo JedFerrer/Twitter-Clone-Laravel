@@ -41,9 +41,14 @@ Route::get('signup', 'UserController@create');
 Route::resource('users', 'UserController');
 
 
-
+//Profile Controller
 Route::get('users/profiles/{nickname}', 'ProfileController@show');
 
+
+
+
+//Follower Controller
+Route::get('follow/{nickname}', 'FollowerController@store');
 
 
 

@@ -22,15 +22,13 @@ class Tweet extends Eloquent {
 		return false;
 	}
 
-
-	public function users(){
-        return $this->belongsTo('User');
+	public function author() {
+        return $this->belongsTo('User', 'user_id');
     }
 
-	// public function names()
- //    {
- //        return $this->hasMany('User');
- //    }
-
+    public static function getByUser($user)
+    {
+   		return $user->tweets()->orderBy('id', 'DESC')->get();
+    }
 
 }

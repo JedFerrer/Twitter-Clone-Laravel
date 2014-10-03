@@ -1,7 +1,8 @@
 @extends('layouts.tweetIndex') 
 
-@section('userNameLink')
-	{{ link_to("/", Auth::user()->name) }}
+@section('userInfo')
+	<p class="user-name">{{ link_to("users/profiles/".Auth::user()->nickname, Auth::user()->name) }}</p>
+	<h5 class="nickname">{{ link_to("users/profiles/".Auth::user()->nickname, '@'.Auth::user()->nickname) }}</h5>
 @stop
 
 @section('formToTweet')
@@ -25,8 +26,8 @@
 @section('tweets')
 	@if($posts->count())
 	    @foreach($posts as $post)
-        	<a href="#" class="list-group-item">
-    			<h5 class="list-group-item-heading"><b>{{ Auth::user()->name }}</b>&nbsp;&nbsp;<span>@</span><span>{{ Auth::user()->nickname }}</span></h5>
+        	<a href="{{ url('users/profiles/'.$post->author->nickname) }}" class="list-group-item">
+    			<h5 class="list-group-item-heading"><b>{{ $post->author->name }}</b>&nbsp;&nbsp;<span>@</span><span>{{ $post->author->nickname }}</span></h5>
     			<p class="list-group-item-text">{{ $post->tweet }}</p>
   			</a>
   		@endforeach

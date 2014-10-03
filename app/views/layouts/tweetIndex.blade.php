@@ -20,15 +20,17 @@
 				    	<div class="thumbnail">
 					        <a href="{{URL::to('/')}}">{{ HTML::image("img/avatar1.png", "Logo") }}</a>
 					        <div class="caption">
-					        	<p class="user-name">@yield('userNameLink')</p>
+					        	<p class="user-name">@yield('userInfo')</p>
+					        	<h5 class="nickname">@yield('userNameLink')</h5>
 					     	</div>
 				    	</div>
 				  	</div>
 
 				  	<ul class="list-group" id="header-user-info">
-					  	<li class="list-group-item">Tweets &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 45</li>
-					  	<li class="list-group-item">Following &nbsp;&nbsp; 45</li>
-					  	<li class="list-group-item">Followers &nbsp;&nbsp; 45</li>
+
+					  	<li class="list-group-item">Tweets &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ $user->tweets()->count() }}</li>
+					  	<li class="list-group-item">Following &nbsp;&nbsp; {{ $user->following()->count() }}</li>
+					  	<li class="list-group-item">Followers &nbsp;&nbsp; {{ $user->followers()->count() }}</li>
 					  	@yield('formToTweet')
 					</ul>
 					<div class="clear"></div>

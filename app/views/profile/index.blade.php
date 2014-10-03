@@ -1,7 +1,34 @@
 @extends('layouts.tweetIndex') 
 
-@section('userNameLink')
-	{{ link_to("user/profile/$user->nickname", $user->name) }}
+@section('userInfo')
+	<p class="user-name">{{ link_to("users/profiles/$user->nickname", $user->name) }}</p>
+	<h5 class="nickname">{{ link_to("users/profiles/$user->nickname", '@'.$user->nickname) }}</h5>
+@stop
+
+@section('formToTweet')
+	@if(Auth::user()->nickname != $user->nickname)
+	<li class="list-group-item list-group-item-success">
+		<a href="{{ url("follow/{$user->nickname}") }}">
+			<button type="button" class="btn btn-success">
+				<span class="glyphicon glyphicon-star"></span> Follow
+			</button>
+		</a>
+		<div class="clear"></div>
+
+	</li>
+	@endif
+
+	@if(Auth::user()->nickname != $user->nickname)
+	<li class="list-group-item list-group-item-success">
+		<a href="{{ url('/edit') }}">
+			<button type="button" class="btn btn-danger">
+				<span class="glyphicon glyphicon-remove"></span> Unfollow
+			</button>
+		</a>
+		<div class="clear"></div>
+
+	</li>
+	@endif
 @stop
 
 @section('tweets')

@@ -117,7 +117,7 @@ body {
 }
 .link-top-container p {
 	/*padding: 46px 0;*/
-	margin-top: 8px;
+	margin-top: 14px;
 }
 
 .footer-container {
@@ -267,9 +267,22 @@ body {
 }
 
 .user-name {
-	text-align: center;
+	text-align: left;
 	font-size: 12pt;
 	font-weight: 700;
+}
+.user-name a{
+	color: #000;
+}
+.nickname {
+	text-align: left;
+}
+.nickname a {
+	color: #8899a6;
+}
+h5.nickname {
+	margin-top: 8px;
+	margin-bottom: 5px;
 }
 
 #header-user-pic {

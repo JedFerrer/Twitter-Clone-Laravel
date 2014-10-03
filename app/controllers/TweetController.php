@@ -10,16 +10,9 @@ class TweetController extends BaseController {
 
 	public function index() {
 		if (!Auth::check()) return Redirect::to('login');
-		//$userId = Auth::user()->id;
-		//$posts = $this->tweet->where('user_id', '=', $userId)->orderBy('id', 'DESC')->get();
 		$posts = $this->tweet->orderBy('id', 'DESC')->get();
-		//$posts = $this->tweet->find(1)->names;
-		//return $posts->users->name;
 		return View::make('tweets.index')->with('posts', $posts);
-
-		// foreach ($posts->users as $user) {
-		// 	echo $user->name;
-		// }
+	
 	}
 
 	public function show() {
