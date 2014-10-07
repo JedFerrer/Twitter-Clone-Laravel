@@ -32,10 +32,11 @@
                         @yield('link-top-left')
                     </div>
                     <div class="link-top-container">
+                      
                         
-                   
+                                           
                         @yield('link-top-right')
-
+                        <div class="clear"></div>
                        
                     </div>
                     <div class="clear"></div>

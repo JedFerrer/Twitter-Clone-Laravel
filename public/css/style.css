@@ -108,7 +108,7 @@ body {
 }
 .link-top-container{
 	float: right;
-	min-width: 100px;
+	min-width: 400px;
 	padding: 10px 0;
 }
 .link-top-container a {
@@ -118,6 +118,8 @@ body {
 .link-top-container p {
 	/*padding: 46px 0;*/
 	margin-top: 14px;
+	float: left;
+	padding-left: 20px;
 }
 
 .footer-container {
@@ -312,5 +314,19 @@ h5.nickname {
 	float: left;
 }
 
+#search-bar {
+	padding-top: 7px;
+	width: 250px;
+	float: left;
+}
 
+#search-btn {
+	float: left;
+}
 
+#result-header {
+	text-align: center;
+}
+#result-header b {
+	color: #66757f;
+}

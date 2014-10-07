@@ -22,7 +22,9 @@
 // 	// 	echo $tweet->tweet, '</br>';
 // 	// }
 // });
-
+Route::get('users/search', 'SearchController@index');
+//Route::get('users/search/{keywords}', 'SearchController@index');
+//Route::resource('users/search', 'SearchController');
 
 Route::get('/', 'TweetController@index');
 Route::resource('tweet', 'TweetController');
