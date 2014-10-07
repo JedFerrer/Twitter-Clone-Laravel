@@ -2,10 +2,14 @@
 
 class ProfileController extends BaseController {
 
-	protected $tweet;
+	protected $user,
+			  $follower;
 
-	public function __construct(Tweet $tweet) {
-		$this->tweet = $tweet;
+	public function __construct(User $user,
+								Follower $follower) 
+	{
+		$this->user = $user;
+		$this->follower = $follower;
 	}
 
 	public function index() {
@@ -19,18 +23,32 @@ class ProfileController extends BaseController {
 		// }
 		// 	return Redirect::to('/');
 
-
+		//Querying and orderBy is seperate
 		// if ($user = User::findByNickname($nickname)) {
 		// 	$user->tweets = Tweet::getByUser($user);
 		// 	return View::make('profile.index', ['user' => $user]); 
 		// }
 
+		if ($user = $this->user->findByNickname($nickname, $withTweetsOrderBy = true)) {
 
-		if ($user = User::findByNickname($nickname, true)) {
-			return View::make('profile.index', ['user' => $user]); 
+			if ($this->follower->checkByIfAlreadyFollowed($nickname, $userInfo = $user->id)) {
+				$following = true;
+			} else {
+				$following = false;
+			}
+
+			$tweetCount = $user->tweets()->count();
+		  	$followingCount = $user->following()->count(); 
+		  	$followersCount = $user->followers()->count();
+  	
+			return View::make('profile.index', [
+				'user' => $user, 
+				'following' => $following,
+				'tweetCount' => $tweetCount,
+				'followingCount' => $followingCount,
+				'followersCount' => $followersCount,
+			]); 
 		}
-
-
 
 		// if($user = User::where('nickname', '=', $nickname)->with(array('tweets' => function($query)
 		// {
@@ -43,12 +61,59 @@ class ProfileController extends BaseController {
 
 	}
 
-	public function create() {
-		
+	public function followingIndex($nickname) {
+		if ($user = $this->user->findByNickname($nickname, false)) {
+			
+			if ($this->follower->checkByIfAlreadyFollowed($nickname, $userInfo = $user->id)) {
+				$following = true;
+			} else {
+				$following = false;
+			}
+
+			$queryCheck = Follower::where('user_id', '=', Auth::user()->id)->get();
+
+			$tweetCount = $user->tweets()->count();
+		  	$followingCount = $user->following()->count(); 
+		  	$followersCount = $user->followers()->count();
+
+			return View::make('profile.following', [
+				'user' => $user,
+				'queryCheck' => $queryCheck,
+				'following' => $following,
+				'tweetCount' => $tweetCount,
+				'followingCount' => $followingCount,
+				'followersCount' => $followersCount,
+			]); 
+
+		}
+
 	}
 
-	public function store() {
-		
+	public function followersIndex($nickname) {
+		if ($user = $this->user->findByNickname($nickname, false)) {
+
+			if ($this->follower->checkByIfAlreadyFollowed($nickname, $userInfo = $user->id)) {
+				$following = true;
+			} else {
+				$following = false;
+			}
+
+			$queryCheck = Follower::where('user_id', '=', Auth::user()->id)->get();
+
+			$tweetCount = $user->tweets()->count();
+		  	$followingCount = $user->following()->count(); 
+		  	$followersCount = $user->followers()->count();
+
+			return View::make('profile.followers', [
+				'user' => $user,
+				'queryCheck' => $queryCheck,
+				'following' => $following,
+				'tweetCount' => $tweetCount,
+				'followingCount' => $followingCount,
+				'followersCount' => $followersCount,
+			]); 
+
+		}
 	}
 
 }

@@ -10,8 +10,19 @@ class TweetController extends BaseController {
 
 	public function index() {
 		if (!Auth::check()) return Redirect::to('login');
+
 		$posts = $this->tweet->orderBy('id', 'DESC')->get();
-		return View::make('tweets.index')->with('posts', $posts);
+		
+		$tweetCount = Auth::user()->tweets()->count();
+	  	$followingCount = Auth::user()->following()->count(); 
+	  	$followersCount = Auth::user()->followers()->count();
+
+		return View::make('tweets.index', [
+		   'posts' => $posts, 
+		   'tweetCount' => $tweetCount,
+		   'followingCount' => $followingCount,
+		   'followersCount' => $followersCount
+		]); 
 	
 	}
 

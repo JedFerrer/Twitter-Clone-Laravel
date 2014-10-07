@@ -277,8 +277,9 @@ body {
 .nickname {
 	text-align: left;
 }
-.nickname a {
+.nickname a, .light-color {
 	color: #8899a6;
+	font-size: 12px;
 }
 h5.nickname {
 	margin-top: 8px;
@@ -294,6 +295,21 @@ h5.nickname {
 	width: 350px;
 	float: left;
 	margin-left: 20px;
+}
+
+.list-following-followers-container .list-group-item {
+	padding: 10px 15px;
+
+}
+
+.list-following-followers-container .column-right {
+	float: left;
+	padding-left: 20px; 
+}
+
+.list-following-followers-container .picture {
+	height: 100px;
+	float: left;
 }
 
 

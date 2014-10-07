@@ -27,9 +27,6 @@
 Route::get('/', 'TweetController@index');
 Route::resource('tweet', 'TweetController');
 
-// Route::get('/', function(){
-// 	return View::make('tweets.index');
-// });
 
 //Session Controller | Login, Logout
 Route::get('login', 'SessionController@create');
@@ -43,12 +40,13 @@ Route::resource('users', 'UserController');
 
 //Profile Controller
 Route::get('users/profiles/{nickname}', 'ProfileController@show');
-
-
+Route::get('users/profiles/following/{nickname}', 'ProfileController@followingIndex');
+Route::get('users/profiles/followers/{nickname}', 'ProfileController@followersIndex');
 
 
 //Follower Controller
 Route::get('follow/{nickname}', 'FollowerController@store');
+Route::get('unfollow/{nickname}', 'FollowerController@delete');
 
 
 

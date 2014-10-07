@@ -27,27 +27,19 @@
 				  	</div>
 
 				  	<ul class="list-group" id="header-user-info">
-
-					  	<li class="list-group-item">Tweets &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ $user->tweets()->count() }}</li>
-					  	<li class="list-group-item">Following &nbsp;&nbsp; {{ $user->following()->count() }}</li>
-					  	<li class="list-group-item">Followers &nbsp;&nbsp; {{ $user->followers()->count() }}</li>
-					  	@yield('formToTweet')
+					  	@yield('formToTweetAndInfos')
 					</ul>
 					<div class="clear"></div>
 				</div>
 			</div>
 
 			<div class="tweets-container">
-					<div class="list-group">
-					    <div class="list-group-item">
-					        <h4 class="list-group-item-heading">Tweets</h4>
-					    </div>
-
-					    @yield('tweets')
-					  
-					</div>
-						
-
+				<div class="list-group">
+				    <div class="list-group-item">
+				        <h4 class="list-group-item-heading">@yield('loop-title')</h4>
+				    </div>
+				    @yield('loop-content')
+				</div>	
 			</div>
 
 		</div>

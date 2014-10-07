@@ -5,7 +5,10 @@
 	<h5 class="nickname">{{ link_to("users/profiles/".Auth::user()->nickname, '@'.Auth::user()->nickname) }}</h5>
 @stop
 
-@section('formToTweet')
+@section('formToTweetAndInfos')
+	<li class="list-group-item">Tweets &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ link_to("users/profiles/".Auth::user()->nickname, $tweetCount) }}</li>
+  	<li class="list-group-item">Following &nbsp;&nbsp; {{ link_to("users/profiles/".Auth::user()->nickname, $followingCount) }}</li>
+  	<li class="list-group-item">Followers &nbsp;&nbsp; {{ link_to("users/profiles/".Auth::user()->nickname, $followersCount) }}</li>
 	@if ($errors->all())
 	  	<li class="list-group-item">
 	     	<div class="alert alert-danger" role="alert">
@@ -23,13 +26,19 @@
 	{{ Form::close() }}
 @stop
 
-@section('tweets')
+@section('loop-title')
+	Tweets
+@stop
+
+@section('loop-content')
 	@if($posts->count())
 	    @foreach($posts as $post)
-        	<a href="{{ url('users/profiles/'.$post->author->nickname) }}" class="list-group-item">
-    			<h5 class="list-group-item-heading"><b>{{ $post->author->name }}</b>&nbsp;&nbsp;<span>@</span><span>{{ $post->author->nickname }}</span></h5>
+        	<!-- <a href="{{ url('users/profiles/'.$post->author->nickname) }}" > -->
+        	<div class="list-group-item">
+    			<h5 class="list-group-item-heading"><b>{{ link_to("users/profiles/".$post->author->nickname, $post->author->name . '&nbsp;&nbsp;&nbsp;@' . $post->author->nickname) }}</b></h5>
     			<p class="list-group-item-text">{{ $post->tweet }}</p>
-  			</a>
+    		</div>
+  			<!-- </a> -->
   		@endforeach
 	@else
 		<p>Unfortunately, there are no Posts to show.</p>
