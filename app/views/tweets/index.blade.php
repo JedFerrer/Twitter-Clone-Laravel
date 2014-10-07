@@ -7,8 +7,8 @@
 
 @section('formToTweetAndInfos')
 	<li class="list-group-item">Tweets &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ link_to("users/profiles/".Auth::user()->nickname, $tweetCount) }}</li>
-  	<li class="list-group-item">Following &nbsp;&nbsp; {{ link_to("users/profiles/".Auth::user()->nickname, $followingCount) }}</li>
-  	<li class="list-group-item">Followers &nbsp;&nbsp; {{ link_to("users/profiles/".Auth::user()->nickname, $followersCount) }}</li>
+  	<li class="list-group-item">Following &nbsp;&nbsp; {{ link_to("users/profiles/following/".Auth::user()->nickname, $followingCount) }}</li>
+  	<li class="list-group-item">Followers &nbsp;&nbsp; {{ link_to("users/profiles/followers/".Auth::user()->nickname, $followersCount) }}</li>
 	@if ($errors->all())
 	  	<li class="list-group-item">
 	     	<div class="alert alert-danger" role="alert">
@@ -41,6 +41,8 @@
   			<!-- </a> -->
   		@endforeach
 	@else
-		<p>Unfortunately, there are no Posts to show.</p>
+		<div class="list-group-item">
+			<p>Unfortunately, there are no Posts to show.</p>
+		</div>
 	@endif
 @stop

@@ -39,14 +39,14 @@ Route::resource('users', 'UserController');
 
 
 //Profile Controller
-Route::get('users/profiles/{nickname}', 'ProfileController@show');
-Route::get('users/profiles/following/{nickname}', 'ProfileController@followingIndex');
-Route::get('users/profiles/followers/{nickname}', 'ProfileController@followersIndex');
+Route::get('users/profiles/{nickname}', 'ProfileController@show')->before('auth');
+Route::get('users/profiles/following/{nickname}', 'ProfileController@followingIndex')->before('auth');
+Route::get('users/profiles/followers/{nickname}', 'ProfileController@followersIndex')->before('auth');
 
 
 //Follower Controller
-Route::get('follow/{nickname}', 'FollowerController@store');
-Route::get('unfollow/{nickname}', 'FollowerController@delete');
+Route::get('follow/{nickname}', 'FollowerController@store')->before('auth');
+Route::get('unfollow/{nickname}', 'FollowerController@delete')->before('auth');
 
 
 

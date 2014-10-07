@@ -29,6 +29,7 @@ class ProfileController extends BaseController {
 		// 	return View::make('profile.index', ['user' => $user]); 
 		// }
 
+
 		if ($user = $this->user->findByNickname($nickname, $withTweetsOrderBy = true)) {
 
 			if ($this->follower->checkByIfAlreadyFollowed($nickname, $userInfo = $user->id)) {
@@ -70,7 +71,7 @@ class ProfileController extends BaseController {
 				$following = false;
 			}
 
-			$queryCheck = Follower::where('user_id', '=', Auth::user()->id)->get();
+			$queryCheck = $this->follower->where('user_id', '=', Auth::user()->id)->get();
 
 			$tweetCount = $user->tweets()->count();
 		  	$followingCount = $user->following()->count(); 
@@ -98,7 +99,7 @@ class ProfileController extends BaseController {
 				$following = false;
 			}
 
-			$queryCheck = Follower::where('user_id', '=', Auth::user()->id)->get();
+			$queryCheck = $this->follower->where('user_id', '=', Auth::user()->id)->get();
 
 			$tweetCount = $user->tweets()->count();
 		  	$followingCount = $user->following()->count(); 
