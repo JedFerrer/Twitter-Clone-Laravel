@@ -9,7 +9,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
 	use UserTrait, RemindableTrait;
 	public $timestamps = false;
-	protected $fillable = ['name','nickname','email','password'];
+	protected $fillable = ['name','nickname','email','password','img_path'];
 	protected $hidden = array('password', 'remember_token');
 	protected $table = 'users';
 
@@ -26,6 +26,10 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		'rpass' => 'required|same:password'
 	];
 
+	public static $uploadImgRules = [
+		'image' => 'required|mimes:jpeg,bmp,png|max:2000'
+	];
+
 	public $errors;
 
 	public function isValid($data, $form) {
@@ -37,8 +41,11 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
 		if ($form == 'SignIn') {
 			$validation = Validator::make($data, static::$signInRules);
-		} else {
+		} else if($form == 'Registration') {
 			$validation = Validator::make($data, static::$registrationRules, $customMessages);
+		} else {
+			$validation = Validator::make($data, static::$uploadImgRules);
+			
 		}
 		
 		if ($validation->passes()) return true;

@@ -122,6 +122,12 @@ body {
 	padding-left: 20px;
 }
 
+.link-top-container .registrationTopLink {
+	margin-top: 8px;
+	float: right;
+	padding-right: 80px;
+}
+
 .footer-container {
 	/*padding-top: 20px;*/
 	min-height: 40px;
@@ -163,47 +169,6 @@ body {
 	margin: 0;
 }
 
-.entries-container {
-	width: 100%;
-	min-height: 20px;
-	padding: 10px;
-	/*background: orange;*/
-	padding-bottom: 20px;
-}
-
-.entries-container .title-date-container h5 {
-	color: rgba(0,0,0,0.6);
-}
-.entries-container .title-date-container h2 {
-	margin-top: 0;
-	text-decoration: none;
-	font-size: 3.5rem;
-	line-height: 1.2em;
-	letter-spacing: -1px;
-}
-
-.entries-container .title-date-container a {
-	color: #444444;
-}
-
-.entries-container .title-date-container a:hover {
-	color: #428bca;
-	text-decoration: none;
-	transition: color ease 0.3s;
-}
-
-.post-content-container p {
-	color: rgba(0,0,0,0.6);
-	line-height: 24px;
-	margin-bottom: 10px;
-}
-.devider {
-/*	text-align: left;*/
-	border-top: 1px solid rgba(0,0,0,0.15);
-	margin-top: 35px;
-}
-
-
 .textbox-wrapper {
 	/*background: red;*/
 	width: 700px;
@@ -212,34 +177,6 @@ body {
 }
 .blog-container textarea {
 	resize: none;
-}
-
-.blog-container .inputbox {
-	margin-top: 15px;
-	width: 270px;
-	height: 25px;
-	letter-spacing: 1px;
-}
-
-.page-number {
-	font-family: 'Open Sans', sans-serif;
-	font-size: 1.3rem;
-	color: rgba(0,0,0,0.6);
-	text-align: center;
-}
-
-
-
-.entries-container .title-date-container .singles-title {
-	font-size: 4.5rem;
-}
-
-.post-content-container .singles-post-content {
-	font-size: 1.7rem;
-	line-height: 30px;
-	color: #000;
-	font-family: 'Raleway', sans-serif;
-
 }
 
 
@@ -252,6 +189,10 @@ body {
 }
 .user-info-container .btn-success {
 	float: right;
+}
+
+.user-info-container .btn-primary {
+	margin-top: 5px;
 }
 
 .user-info-container .list-group-item {
@@ -293,6 +234,16 @@ h5.nickname {
 	width: 250px;
 }
 
+#header-user-pic2 {
+	margin: auto;
+	width: 400px;
+}
+
+.up-container {
+	width: 400px;
+	margin: auto;
+}
+
 #header-user-info {
 	width: 350px;
 	float: left;
@@ -329,4 +280,31 @@ h5.nickname {
 }
 #result-header b {
 	color: #66757f;
+}
+
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+
+
+
+.up-container .btn-block {
+	margin-top: 8px;
+	padding: 8px 0;
 }

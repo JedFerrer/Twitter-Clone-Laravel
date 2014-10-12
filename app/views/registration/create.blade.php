@@ -5,7 +5,7 @@
 @stop
 
 @section('link-top-right')
-        <p> {{ link_to("login", 'Sign In') }} </p> 
+        <p class="registrationTopLink"> {{ link_to("login", 'Sign In') }} </p> 
 @stop
 
 @section('content')

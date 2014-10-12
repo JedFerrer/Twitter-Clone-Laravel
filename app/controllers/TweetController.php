@@ -14,9 +14,7 @@ class TweetController extends BaseController {
 
 	public function index() {
 		if (!Auth::check()) return Redirect::to('login');
-
-		//$posts = $this->tweet->orderBy('id', 'DESC')->get();
-		$queryCheck = Follower::where('user_id', '=', Auth::user()->id)->get();
+		$queryCheck = $this->follower->where('user_id', '=', Auth::user()->id)->get();
 
 		$dept = array();
 		$dept[] = Auth::user()->id;
@@ -24,18 +22,25 @@ class TweetController extends BaseController {
 			$dept[] = $key->following_id;
 		}
 
-		$posts = $this->tweet->whereIn('user_id', $dept)->orderBy('id', 'DESC')->get();
+		$posts = $this->tweet->whereIn('user_id', $dept)->orderBy('id', 'DESC')->paginate(10);
 	
 		$tweetCount = Auth::user()->tweets()->count();
 	  	$followingCount = Auth::user()->following()->count(); 
 	  	$followersCount = Auth::user()->followers()->count();
 
+	  	//retrive profile picture path
 
+		if($imgPathProfile = Auth::user()->img_path){
+		} else {
+			$imgPathProfile = "default/avatar1.png";
+		}
+		
 		return View::make('tweets.index', [
 		   'posts' => $posts, 
 		   'tweetCount' => $tweetCount,
 		   'followingCount' => $followingCount,
-		   'followersCount' => $followersCount
+		   'followersCount' => $followersCount,
+		   'imgPathProfile' => $imgPathProfile
 		]); 
 	
 	}

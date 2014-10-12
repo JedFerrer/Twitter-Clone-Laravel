@@ -7,10 +7,11 @@
 		<div class="row">
 		    <div class="col-sm-6 col-md-4" id="header-user-pic">
 		    	<div class="thumbnail">
-			        <a href="{{URL::to('/')}}">{{ HTML::image("img/avatar1.png", "Logo") }}</a>
+			        
+			        <a href="{{URL::to('/')}}">{{ HTML::image("uploads/" . $imgPathProfile, "Logo") }}</a>
+			        	@yield('add-prof-photo')
 			        <div class="caption">
-			        	<p class="user-name">@yield('userInfo')</p>
-			        	<h5 class="nickname">@yield('userNameLink')</h5>
+			        	@yield('userInfo')	
 			     	</div>
 		    	</div>
 		  	</div>

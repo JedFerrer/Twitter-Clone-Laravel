@@ -6,7 +6,8 @@
 
 @section('loop-content')
 
-	@if($user->count())
+	@if($user->tweets->count())
+
 	    @foreach($user->tweets as $tweet)
         	<div class="list-group-item">
 
@@ -19,6 +20,7 @@
 			<p>Unfortunately, there are no Tweets to show.</p>
 		</div>
 	@endif
+	
 
 
 

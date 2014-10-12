@@ -2,45 +2,41 @@
 
 class SearchController extends BaseController {
 
-	protected $tweet,
+	protected $user,
 			  $follower;
 
-	public function __construct(Tweet $tweet,
+	public function __construct(User $user,
 								Follower $follower) 
 	{
-		$this->tweet = $tweet;
+		$this->user = $user;
 		$this->follower = $follower;
 	}
 
 	public function index() {
 		$searchKeyValue = Input::get('q');
 
-		$query = User::where('name', 'LIKE', '%'.$searchKeyValue.'%')
+		$query = $this->user->where('name', 'LIKE', '%'.$searchKeyValue.'%')
 		->orwhere('nickname', 'LIKE', '%'.$searchKeyValue.'%')
 		->get();
 
+		// $queryCheck = $this->follower->where('user_id', '=', Auth::user()->id)->get();
+		// $queryCheckToLabel = $this->follower->where('following_id', '=', Auth::user()->id)->get();
+
+		if ($this->follower->listOftheFollowersId()) {
+			$followersIdCollection = $this->follower->followersIdCollection;
+		}
+
+		if ($this->follower->listOftheFollowingId()) {
+			$followingIdCollection = $this->follower->followingIdCollection;
+		}
+
 		return View::make('search.index', [
 			'query' => $query,
+			'followersIdCollection' => $followersIdCollection,
+			'followingIdCollection' => $followingIdCollection,
 			'searchKeyValue' => $searchKeyValue
 		]);
-
-		foreach ($query as $key) {
-			echo $key->name . '</br>';
-		}
 	}
-
-	public function store() {
-		// dd();
-		// return 'boom1';
-
-	}
-
-	public function show() {
-		// $searchKeyValue = Input::get('search');
-		// return Redirect::to('users/search/'. $searchKeyValue);
-	}
-
-
 }
 
 ?>

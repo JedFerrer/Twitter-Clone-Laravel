@@ -1,5 +1,20 @@
 @extends('layouts.tweetIndex') 
 
+@section('add-prof-photo')
+	@if(Auth::user()->nickname == $user->nickname)
+		<a href="{{ url("users/profiles/picture/" . Auth::user()->nickname) }}">
+		    <button type="button" class="btn btn-primary btn-block">
+		      <span class="glyphicon glyphicon-plus"></span> Add Profile Picture
+		    </button>
+		</a>
+	@endif	
+	<!-- <a href="{{ url("/") }}">
+	    <button type="button" class="btn btn-primary btn-block">
+	      <span class="glyphicon glyphicon-plus"></span> Update Profile Picture
+	    </button>
+	</a> -->
+@stop
+
 @section('userInfo')
 	<p class="user-name">{{ link_to("users/profiles/$user->nickname", $user->name) }}</p>
 	<h5 class="nickname">{{ link_to("users/profiles/$user->nickname", '@'.$user->nickname) }}</h5>

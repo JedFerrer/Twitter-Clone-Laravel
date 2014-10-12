@@ -6,7 +6,8 @@
 	"type": "project",
 	"require": {
 		"laravel/framework": "4.2.*",
-		"barryvdh/laravel-debugbar": "1.x"
+		"barryvdh/laravel-debugbar": "1.x",
+		"nesbot/Carbon": "1.13.0"
 	},
 	"autoload": {
 		"classmap": [

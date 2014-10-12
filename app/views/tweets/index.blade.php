@@ -40,6 +40,9 @@
     		</div>
   			<!-- </a> -->
   		@endforeach
+  		<div style="text-align: center;">
+			{{ $posts->links() }}
+		</div>
 	@else
 		<div class="list-group-item">
 			<p>Unfortunately, there are no Posts to show.</p>

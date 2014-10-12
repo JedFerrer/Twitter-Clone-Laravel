@@ -6,54 +6,66 @@
 
 @section('loop-content')
 
-  	@if($user->count())
+  @if($user->following->count())
+    @foreach($user->following as $following)
+      <div class="list-following-followers-container">
+        <div class="list-group-item">
 
-  	    @foreach($user->following as $following)
-          <div class="list-following-followers-container">
-            <div class="list-group-item">
-                <a href="{{URL::to('users/profiles/' . $following->followingAuthorInfo->nickname)}}">{{ HTML::image('img/avatar1.png', 'Logo', array('class' => 'picture')) }}</a>
-                <div class="column-right">
-                  <h5 class="list-group-item-heading"><b>{{ link_to("users/profiles/" . $following->followingAuthorInfo->nickname, $following->followingAuthorInfo->name) }}</b></h5>
-                  <h5 class="list-group-item-heading"><b>{{ link_to("users/profiles/" . $following->followingAuthorInfo->nickname, '@' . $following->followingAuthorInfo->nickname) }}</b></h5>
+            @if($imgPath = $following->followingAuthorInfo->img_path)
+            @else
+              {{--*/ $imgPath = "default/avatar1.png" /*--}}
+            @endif
 
-                  {{--*/ $followedByCurrentUser = false /*--}}
-                  @foreach($queryCheck as $verify)
-                      @if($verify->following_id == $following->following_id)
-                          {{--*/ $followedByCurrentUser = true /*--}}
-                          @if($followedByCurrentUser == true)
-                            <p class="light-color">FOLLOWS YOU</p>
-                          @endif
-                      @endif
-                  @endforeach
+            <a href="{{URL::to('users/profiles/' . $following->followingAuthorInfo->nickname)}}">{{ HTML::image('uploads/' . $imgPath, 'Logo', array('class' => 'picture')) }}</a>
+            <div class="column-right">
+              <h5 class="list-group-item-heading"><b>{{ link_to("users/profiles/" . $following->followingAuthorInfo->nickname, $following->followingAuthorInfo->name) }}</b></h5>
+              <h5 class="list-group-item-heading"><b>{{ link_to("users/profiles/" . $following->followingAuthorInfo->nickname, '@' . $following->followingAuthorInfo->nickname) }}</b></h5>
 
-                  @if((Auth::user()->id != $following->following_id) && ($followedByCurrentUser != true))
-                  
-                    <a href="{{ url("follow/{$following->followingAuthorInfo->nickname}") }}">
-                      <button type="button" class="btn btn-success">
-                        <span class="glyphicon glyphicon-star"></span> Follow
-                      </button>
-                    </a>
-                    <div class="clear"></div>
-
+              {{--*/ $followedByCurrentUser = false /*--}}
+              @if (in_array($following->following_id, $followersIdCollection))
+                  {{--*/ $followedByCurrentUser = true /*--}}
+                  @if($followedByCurrentUser == true)
+                    <p class="light-color">FOLLOWS YOU</p>
                   @endif
-                  
-                  @if((Auth::user()->id != $following->following_id) && ($followedByCurrentUser == true))
-                 
-                    <a href="{{ url("unfollow/{$following->followingAuthorInfo->nickname}") }}">
-                      <button type="button" class="btn btn-danger">
-                        <span class="glyphicon glyphicon-remove"></span> Unfollow
-                      </button>
-                    </a>
-                    <div class="clear"></div>
+              @endif
 
-                  @endif
-                </div>
+              {{--*/ $followedByCurrentUser2 = false /*--}}
+              @if (in_array($following->following_id, $followingIdCollection)) 
+                  {{--*/ $followedByCurrentUser2 = true /*--}}
+              @endif
+
+              @if((Auth::user()->id != $following->following_id) && ($followedByCurrentUser2 != true))
+              
+                <a href="{{ url("follow/{$following->followingAuthorInfo->nickname}") }}">
+                  <button type="button" class="btn btn-success">
+                    <span class="glyphicon glyphicon-star"></span> Follow
+                  </button>
+                </a>
                 <div class="clear"></div>
+
+              @endif
+              
+              @if((Auth::user()->id != $following->following_id) && ($followedByCurrentUser2 == true))
+             
+                <a href="{{ url("unfollow/{$following->followingAuthorInfo->nickname}") }}">
+                  <button type="button" class="btn btn-danger">
+                    <span class="glyphicon glyphicon-remove"></span> Unfollow
+                  </button>
+                </a>
+                <div class="clear"></div>
+              @endif
+
             </div>
-          </div>
-    		@endforeach
-  	@else
-  		<p>Unfortunately, there are no Tweets to show.</p>
-  	@endif
+            <div class="clear"></div>
+        </div>
+      </div>
+		@endforeach
+    
+  @else
+    <div class="list-group-item">
+      <p>Unfortunately, there are no users followed</p>
+    </div>
+  @endif
+  	
 
 @stop

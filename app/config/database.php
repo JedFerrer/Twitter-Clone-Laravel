@@ -1,12 +1,5 @@
 <?php
 
-$url = parse_url(getenv("DATABASE_URL"));
-
-$host = $url["host"];
-$username = $url["user"];
-$password = $url["pass"];
-$database = substr($url["path"], 1);
-
 return array(
 
 	/*
@@ -62,9 +55,9 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'twitter-clone2',
-			'username'  => 'root',
-			'password'  => '',
+			'database'  => 'homestead',
+			'username'  => 'homestead',
+			'password'  => 'secret',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
@@ -72,10 +65,10 @@ return array(
 
 		'pgsql' => array(
 			'driver'   => 'pgsql',
-			'host'     => $host,
-			'database' => $database,
-			'username' => $username,
-			'password' => $password,
+			'host'     => 'localhost',
+			'database' => 'homestead',
+			'username' => 'homestead',
+			'password' => 'secret',
 			'charset'  => 'utf8',
 			'prefix'   => '',
 			'schema'   => 'public',

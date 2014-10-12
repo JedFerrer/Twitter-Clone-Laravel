@@ -1,34 +1,16 @@
 <?php
-//tweets
-
-//index
 
 
-// Route::get('/sample', function(){
-// 	// $tweets = User::find(1)->tweets()->orderBy('id', 'DESC')->get();
-// 	// //$tweets = User::where('nickname', 'Jed')->tweets;
-// 	// //$tweets = User::where('nickname', '=', 'Jed')->tweets()->get();
-	 
-// 	//  foreach ($tweets as $tweet) {
-// 	//  	echo $tweet->tweet, '</br>';
-// 	//  }
+// Photo Controller | Index, Browse and Upload Photo
+Route::get('users/profiles/picture/{nickname}', 'PhotoController@index')->before('auth');
+Route::post('users/profiles/picture/update/{nickname}', 'PhotoController@update')->before('auth');
 
+//Search Controller | Search User
+Route::get('users/search', 'SearchController@index')->before('auth');
 
-// 	$user = User::where('nickname', '=', 'Jed')->orderBy('id', 'DESC')->first();
-
-// 	return $user->tweets;
-
-// 	// foreach ($user->tweets as $tweet) {
-// 	// 	echo $tweet->tweet, '</br>';
-// 	// }
-// });
-Route::get('users/search', 'SearchController@index');
-//Route::get('users/search/{keywords}', 'SearchController@index');
-//Route::resource('users/search', 'SearchController');
-
+//Tweet Controller | Home Tweets Index, Post Tweets
 Route::get('/', 'TweetController@index');
 Route::resource('tweet', 'TweetController');
-
 
 //Session Controller | Login, Logout
 Route::get('login', 'SessionController@create');
@@ -39,16 +21,16 @@ Route::resource('session', 'SessionController');
 Route::get('signup', 'UserController@create');
 Route::resource('users', 'UserController');
 
-
 //Profile Controller
 Route::get('users/profiles/{nickname}', 'ProfileController@show')->before('auth');
 Route::get('users/profiles/following/{nickname}', 'ProfileController@followingIndex')->before('auth');
 Route::get('users/profiles/followers/{nickname}', 'ProfileController@followersIndex')->before('auth');
 
-
 //Follower Controller
 Route::get('follow/{nickname}', 'FollowerController@store')->before('auth');
 Route::get('unfollow/{nickname}', 'FollowerController@delete')->before('auth');
+
+
 
 
 

@@ -19,7 +19,7 @@ class FollowerController extends BaseController {
 	public function store($nickname) {
 
 		if ($user = $this->user->findByNickname($nickname, false)) {
-			if (Follower::checkByIfAlreadyFollowed($nickname, $userInfo = $user->id)) {
+			if ($this->follower->checkByIfAlreadyFollowed($nickname, $userInfo = $user->id)) {
 				return App::abort(500);
 			} 
 

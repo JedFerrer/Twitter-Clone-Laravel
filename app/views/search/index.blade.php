@@ -2,27 +2,73 @@
 
 @section('main-content')
 
-	
-
 	<div class="tweets-container">
 		<div class="list-group">
 		    <div class="list-group-item">
 		        <h4 class="list-group-item-heading" id="result-header">Results for <b>{{$searchKeyValue}}</b></h4>
 		    </div>
-		    @foreach($query as $result)
-		    <div class="list-following-followers-container">
-			    <a href="#" class="list-group-item">
-			    	{{ HTML::image('img/avatar1.png', 'Logo', array('class' => 'picture')) }}
-			        <div class="column-right">
-			        	<h4 class="list-group-item-heading">{{$result->name}}</h4>
-			        	<h5 class="list-group-item-heading">{{'@' . $result->nickname}}</h5>
-			        </div>
-                	<div class="clear"></div>
-                  
-			    </a>
-            </div>
-			    
-		    @endforeach
+		    @if($query->count())
+			    @foreach($query as $result)
+			    <div class="list-following-followers-container">
+				    <div class="list-group-item">
+
+		                @if($imgPath = $result->img_path)
+		                @else
+		                  {{--*/ $imgPath = "default/avatar1.png" /*--}}
+		                @endif
+
+				    	<a href="{{URL::to('users/profiles/' . $result->nickname)}}">{{ HTML::image('uploads/' . $imgPath, 'Logo', array('class' => 'picture')) }}</a>
+				        <div class="column-right">
+				        	<h5 class="list-group-item-heading"><b>{{ link_to("users/profiles/" . $result->nickname, $result->name) }}</b></h5>
+                 			<h5 class="list-group-item-heading"><b>{{ link_to("users/profiles/" . $result->nickname, '@' . $result->nickname) }}</b></h5>
+                 	
+			                  {{--*/ $followedByCurrentUser = false /*--}}
+			                  @if (in_array($result->id, $followersIdCollection))
+			                      {{--*/ $followedByCurrentUser = true /*--}}
+			                      @if($followedByCurrentUser == true)
+			                        <p class="light-color">FOLLOWS YOU</p>
+			                      @endif
+			                  @endif
+
+			                  {{--*/ $followedByCurrentUser2 = false /*--}}
+			                  @if (in_array($result->id, $followingIdCollection)) 
+			                      {{--*/ $followedByCurrentUser2 = true /*--}}
+			                  @endif
+
+			                @if((Auth::user()->id != $result->id) && ($followedByCurrentUser2 != true))
+                
+			                  <a href="{{ url("follow/{$result->nickname}") }}">
+			                    <button type="button" class="btn btn-success">
+			                      <span class="glyphicon glyphicon-star"></span> Follow
+			                    </button>
+			                  </a>
+			                  <div class="clear"></div>
+
+			                @endif
+
+			                @if((Auth::user()->id != $result->id) && ($followedByCurrentUser2 == true))
+			               
+			                  <a href="{{ url("unfollow/{$result->nickname}") }}">
+			                    <button type="button" class="btn btn-danger">
+			                      <span class="glyphicon glyphicon-remove"></span> Unfollow
+			                    </button>
+			                  </a>
+			                  <div class="clear"></div>
+			                
+			                @endif
+
+				        </div>
+	                	<div class="clear"></div>
+	                  
+				    </div>
+	            </div>
+				    
+			    @endforeach
+			@else
+			<div class="list-group-item">
+				<p>Sorry, we couldn't find any results for this search.<p>
+			</div>
+		    @endif
 		    @yield('loop-content')
 		</div>	
 	</div>
