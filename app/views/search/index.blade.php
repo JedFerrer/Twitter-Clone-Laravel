@@ -37,10 +37,8 @@
 
 			                @if((Auth::user()->id != $result->id) && ($followedByCurrentUser2 != true))
                 
-			                  <a href="{{ url("follow/{$result->nickname}") }}">
-			                    <button type="button" class="btn btn-success">
+			                  <a class="btn btn-success" href="{{ url("follow/{$result->nickname}") }}">
 			                      <span class="glyphicon glyphicon-star"></span> Follow
-			                    </button>
 			                  </a>
 			                  <div class="clear"></div>
 
@@ -48,10 +46,8 @@
 
 			                @if((Auth::user()->id != $result->id) && ($followedByCurrentUser2 == true))
 			               
-			                  <a href="{{ url("unfollow/{$result->nickname}") }}">
-			                    <button type="button" class="btn btn-danger">
+			                  <a class="btn btn-danger" href="{{ url("unfollow/{$result->nickname}") }}">
 			                      <span class="glyphicon glyphicon-remove"></span> Unfollow
-			                    </button>
 			                  </a>
 			                  <div class="clear"></div>
 			                
@@ -64,6 +60,7 @@
 	            </div>
 				    
 			    @endforeach
+			    
 			@else
 			<div class="list-group-item">
 				<p>Sorry, we couldn't find any results for this search.<p>

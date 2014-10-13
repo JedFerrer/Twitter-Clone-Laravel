@@ -37,10 +37,16 @@
         	<div class="list-group-item">
     			<h5 class="list-group-item-heading"><b>{{ link_to("users/profiles/".$post->author->nickname, $post->author->name . '&nbsp;&nbsp;&nbsp;@' . $post->author->nickname) }}</b></h5>
     			<p class="list-group-item-text">{{ $post->tweet }}</p>
+    			
+    			@if($post->author->id == Auth::user()->id)
+	    			<a class="btn btn-default btn-xs" id="delete-tweet-btn" href="{{ url("tweet/delete/{$post->id}") }}">
+						<span class="glyphicon glyphicon-remove"></span>
+					</a>
+				@endif
     		</div>
   			<!-- </a> -->
   		@endforeach
-  		<div style="text-align: center;">
+  		<div style="text-align: center; background: #fff;">
 			{{ $posts->links() }}
 		</div>
 	@else

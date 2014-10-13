@@ -2,7 +2,6 @@
 
 
 class Tweet extends Eloquent {
-	//public $timestamps = false;
 	protected $fillable = ['tweet','user_id'];
 	protected $table = 'tweets';
 

@@ -4,15 +4,15 @@
 	@if(Auth::user()->nickname == $user->nickname)
 		<a href="{{ url("users/profiles/picture/" . Auth::user()->nickname) }}">
 		    <button type="button" class="btn btn-primary btn-block">
-		      <span class="glyphicon glyphicon-plus"></span> Add Profile Picture
+				<span class="glyphicon glyphicon-plus"></span> 
+				@if($imgPathProfile == 'default/avatar1.png')
+					Add Profile Picture
+				@else
+					Update Profile Picture
+				@endif
 		    </button>
 		</a>
 	@endif	
-	<!-- <a href="{{ url("/") }}">
-	    <button type="button" class="btn btn-primary btn-block">
-	      <span class="glyphicon glyphicon-plus"></span> Update Profile Picture
-	    </button>
-	</a> -->
 @stop
 
 @section('userInfo')
@@ -27,10 +27,8 @@
 
 	@if((Auth::user()->nickname != $user->nickname) && ($following == false))
 	<li class="list-group-item list-group-item-success">
-		<a href="{{ url("follow/{$user->nickname}") }}">
-			<button type="button" class="btn btn-success">
-				<span class="glyphicon glyphicon-star"></span> Follow
-			</button>
+		<a class="btn btn-success" href="{{ url("follow/{$user->nickname}") }}">
+			<span class="glyphicon glyphicon-star"></span> Follow
 		</a>
 		<div class="clear"></div>
 
@@ -39,10 +37,8 @@
 
 	@if((Auth::user()->nickname != $user->nickname) && ($following == true))
 	<li class="list-group-item list-group-item-success">
-		<a href="{{ url("unfollow/{$user->nickname}") }}">
-			<button type="button" class="btn btn-danger">
-				<span class="glyphicon glyphicon-remove"></span> Unfollow
-			</button>
+		<a class="btn btn-danger" href="{{ url("unfollow/{$user->nickname}") }}">
+			<span class="glyphicon glyphicon-remove"></span> Unfollow
 		</a>
 		<div class="clear"></div>
 

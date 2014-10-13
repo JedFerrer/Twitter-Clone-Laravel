@@ -8,7 +8,8 @@ Route::post('users/profiles/picture/update/{nickname}', 'PhotoController@update'
 //Search Controller | Search User
 Route::get('users/search', 'SearchController@index')->before('auth');
 
-//Tweet Controller | Home Tweets Index, Post Tweets
+//Tweet Controller | Home Tweets Index, Post Tweets, Delete Tweets
+Route::get('tweet/delete/{id}', 'TweetController@Delete');
 Route::get('/', 'TweetController@index');
 Route::resource('tweet', 'TweetController');
 

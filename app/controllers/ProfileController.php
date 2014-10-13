@@ -30,7 +30,7 @@ class ProfileController extends BaseController {
 		// }
 
 
-		if ($user = $this->user->findByNickname($nickname, $withTweetsOrderBy = true)) {
+		if ($user = $this->user->findByNickname($nickname, 'withTweetsOrderBy')) {
 
 			if ($this->follower->checkByIfAlreadyFollowed($nickname, $userInfo = $user->id)) {
 				$following = true;
@@ -69,28 +69,13 @@ class ProfileController extends BaseController {
 	}
 
 	public function followingIndex($nickname) {
-		if ($user = $this->user->findByNickname($nickname, false)) {
+		if ($user = $this->user->findByNickname($nickname, 'withFollowingOrderBy')) {
 			
 			if ($this->follower->checkByIfAlreadyFollowed($nickname, $userInfo = $user->id)) {
 				$following = true;
 			} else {
 				$following = false;
 			}
-
-			// $queryCheck = $this->follower->where('user_id', '=', Auth::user()->id)->get();
-			// $queryCheckToLabel = $this->follower->where('following_id', '=', Auth::user()->id)->get();
-			
-			// //gets all the following ID's
-			// $followingIdCollection = array();
-			// foreach ($queryCheck as $key) {
-			// 	$followingIdCollection[] = $key->following_id;
-			// }
-
-			// //gets all the followers ID's
-			// $followersIdCollection = array();
-			// foreach ($queryCheckToLabel as $key) {
-			// 	$followersIdCollection[] = $key->user_id;
-			// }
 
 			if ($this->follower->listOftheFollowersId()) {
 				$followersIdCollection = $this->follower->followersIdCollection;
@@ -127,32 +112,13 @@ class ProfileController extends BaseController {
 	}
 
 	public function followersIndex($nickname) {
-		if ($user = $this->user->findByNickname($nickname, false)) {
+		if ($user = $this->user->findByNickname($nickname, 'withFollowersOrderBy')) {
 
 			if ($this->follower->checkByIfAlreadyFollowed($nickname, $userInfo = $user->id)) {
 				$following = true;
 			} else {
 				$following = false;
 			}
-			
-			// $queryCheck = $this->follower->where('user_id', '=', Auth::user()->id)->get();
-			// $queryCheckToLabel = $this->follower->where('following_id', '=', Auth::user()->id)->get();
-			//////////////~~
-			// $queryCheck = $this->follower->where('user_id', '=', Auth::user()->id)->get();
-			// $queryCheckToLabel = $this->follower->where('following_id', '=', Auth::user()->id)->get();
-			
-			// //gets all the following ID's
-			// $followingIdCollection = array();
-			// foreach ($queryCheck as $key) {
-			// 	$followingIdCollection[] = $key->following_id;
-			// }
-
-			// //gets all the followers ID's
-			// $followersIdCollection = array();
-			// foreach ($queryCheckToLabel as $key) {
-			// 	$followersIdCollection[] = $key->user_id;
-			// }
-			//////////////~~
 
 			if ($this->follower->listOftheFollowersId()) {
 				$followersIdCollection = $this->follower->followersIdCollection;

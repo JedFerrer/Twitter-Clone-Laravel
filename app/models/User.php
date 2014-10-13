@@ -69,12 +69,17 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         return $this->hasMany('Follower', 'user_id');
     }
 
-    public static function findByNickname($nickname, $withTweetsOrderBy = false)
+    public static function findByNickname($nickname, $oderBy)
     {	
     	$user = User::where('nickname', '=', $nickname)->first();
-    	if ($withTweetsOrderBy) {
-    		$user->tweets = $user->tweets()->orderBy('id', 'DESC')->get();
+    	if ($oderBy == 'withTweetsOrderBy') {
+    		$user->tweets = $user->tweets()->orderBy('id', 'DESC')->paginate(10);
+    	} elseif ($oderBy == 'withFollowersOrderBy') {
+    		$user->followers = $user->followers()->paginate(10);
+    	} elseif ($oderBy == 'withFollowingOrderBy') {
+    		$user->following = $user->following()->paginate(10);
     	}
+
     	return $user;
     }
 

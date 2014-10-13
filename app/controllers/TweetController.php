@@ -16,14 +16,13 @@ class TweetController extends BaseController {
 		if (!Auth::check()) return Redirect::to('login');
 		$queryCheck = $this->follower->where('user_id', '=', Auth::user()->id)->get();
 
-		$dept = array();
-		$dept[] = Auth::user()->id;
+		$userIdToFetch = array();
+		$userIdToFetch[] = Auth::user()->id;
 		foreach ($queryCheck as $key) {
-			$dept[] = $key->following_id;
+			$userIdToFetch[] = $key->following_id;
 		}
 
-		$posts = $this->tweet->whereIn('user_id', $dept)->orderBy('id', 'DESC')->paginate(10);
-	
+		$posts = $this->tweet->whereIn('user_id', $userIdToFetch)->orderBy('id', 'DESC')->paginate(10);
 		$tweetCount = Auth::user()->tweets()->count();
 	  	$followingCount = Auth::user()->following()->count(); 
 	  	$followersCount = Auth::user()->followers()->count();
@@ -56,6 +55,15 @@ class TweetController extends BaseController {
 		));
 
 		return Redirect::to('/');
+	}
+
+	public function Delete($id) {
+		$tweetId = $this->tweet->find($id);
+		if($tweetId->user_id == Auth::user()->id){
+			$tweetId->delete();
+			return Redirect::to('/');
+		} 
+			return Redirect::to('/');
 	}
 
 }

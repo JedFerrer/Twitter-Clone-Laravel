@@ -28,14 +28,12 @@ class PhotoController extends BaseController {
 			$extension = $file['image']->getClientOriginalExtension(); //if you need extension of the file
 
 			$folderAndImagePath = $folderName . '/' . $filename;
-			
 			$uploadSuccess = $file['image']->move($destinationPath, $filename);
 			 
 			if($uploadSuccess) {
-				$user = User::find(Auth::user()->id);
+				$user = $this->user->find(Auth::user()->id);
 				$user->img_path = $folderAndImagePath;
 				$user->save();
-				// return Response::json('success', 200); // or do a redirect with some message that file was uploaded
 				return Redirect::back()->with("message", "Your Profile picture successfuly uploaded");
 			} else {
 			   	return Redirect::back()->with("errMessage", "Some errors occured, Pls try again");

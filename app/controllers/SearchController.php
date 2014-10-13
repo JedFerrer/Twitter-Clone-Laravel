@@ -19,9 +19,6 @@ class SearchController extends BaseController {
 		->orwhere('nickname', 'LIKE', '%'.$searchKeyValue.'%')
 		->get();
 
-		// $queryCheck = $this->follower->where('user_id', '=', Auth::user()->id)->get();
-		// $queryCheckToLabel = $this->follower->where('following_id', '=', Auth::user()->id)->get();
-
 		if ($this->follower->listOftheFollowersId()) {
 			$followersIdCollection = $this->follower->followersIdCollection;
 		}
