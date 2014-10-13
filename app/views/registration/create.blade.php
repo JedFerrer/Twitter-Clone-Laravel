@@ -1,5 +1,9 @@
 @extends('layouts.default')
 
+@section('site-title')
+	Sign up for Twitter Clone
+@stop
+
 @section('link-top-left')
 	<h5>Twitter Clone</h5>
 @stop

@@ -1,5 +1,9 @@
 @extends('layouts.tweetIndex') 
 
+@section('site-title')
+	Twitter Clone
+@stop
+
 @section('userInfo')
 	<p class="user-name">{{ link_to("users/profiles/".Auth::user()->nickname, Auth::user()->name) }}</p>
 	<h5 class="nickname">{{ link_to("users/profiles/".Auth::user()->nickname, '@'.Auth::user()->nickname) }}</h5>
@@ -35,7 +39,8 @@
 	    @foreach($posts as $post)
         	<!-- <a href="{{ url('users/profiles/'.$post->author->nickname) }}" > -->
         	<div class="list-group-item">
-    			<h5 class="list-group-item-heading"><b>{{ link_to("users/profiles/".$post->author->nickname, $post->author->name . '&nbsp;&nbsp;&nbsp;@' . $post->author->nickname) }}</b></h5>
+        		
+    			<h5 class="list-group-item-heading"><b>{{ link_to("users/profiles/".$post->author->nickname, $post->author->name . '&nbsp;&nbsp;@' . $post->author->nickname) }}</b><span class="dateformated">{{$post->created_at }}</span></h5>
     			<p class="list-group-item-text">{{ $post->tweet }}</p>
     			
     			@if($post->author->id == Auth::user()->id)

@@ -1,7 +1,7 @@
 <?php
 
 
-class Tweet extends Eloquent {
+class Tweet extends BaseModel {
 	protected $fillable = ['tweet','user_id'];
 	protected $table = 'tweets';
 
@@ -29,5 +29,10 @@ class Tweet extends Eloquent {
     {
    		return $user->tweets()->orderBy('id', 'DESC')->get();
     }
+
+ //    public function getDates()
+	// {
+	//     return array('created_at');
+	// }
 
 }

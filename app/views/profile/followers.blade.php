@@ -1,5 +1,13 @@
 @extends('profile.default') 
 
+@section('site-title')
+  People following {{$user->name}})
+@stop
+
+@section('site-title')
+  Sign up for Twitter Clone
+@stop
+
 @section('loop-title')
   Followers
 @stop

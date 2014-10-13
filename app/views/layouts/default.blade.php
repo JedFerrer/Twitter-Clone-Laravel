@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Twitter Clone</title>
+        <title>@yield('site-title')</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
         <!-- Bootstrap -->

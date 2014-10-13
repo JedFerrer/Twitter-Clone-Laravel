@@ -1,5 +1,9 @@
 @extends('layouts.plain') 
 
+@section('site-title')
+	Profile Picture Upload
+@stop
+
 @section('main-content')
 	
 	<div class="up-container">

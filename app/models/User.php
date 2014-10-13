@@ -45,7 +45,6 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 			$validation = Validator::make($data, static::$registrationRules, $customMessages);
 		} else {
 			$validation = Validator::make($data, static::$uploadImgRules);
-			
 		}
 		
 		if ($validation->passes()) return true;

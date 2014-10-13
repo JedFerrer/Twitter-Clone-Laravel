@@ -1,5 +1,9 @@
 @extends('profile.default') 
 
+@section('site-title')
+  People followed by {{$user->name}})
+@stop
+
 @section('loop-title')
   Following
 @stop

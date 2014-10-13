@@ -1,5 +1,9 @@
 @extends('profile.default') 
 
+@section('site-title')
+	{{$user->name}} ({{'@'.$user->nickname}})
+@stop
+
 @section('loop-title')
 	Tweets
 @stop
@@ -11,7 +15,7 @@
 	    @foreach($user->tweets as $tweet)
         	<div class="list-group-item">
 
-    			<h5 class="list-group-item-heading"><b>{{ link_to("users/profiles/".$user->nickname, $user->name . '&nbsp;&nbsp;&nbsp;@' . $user->nickname) }}</b></h5>
+    			<h5 class="list-group-item-heading"><b>{{ link_to("users/profiles/".$user->nickname, $user->name . '&nbsp;&nbsp;@' . $user->nickname) }}</b><span class="dateformated">{{$tweet->created_at }}</span></h5>
     			<p class="list-group-item-text">{{ $tweet->tweet }}</p>
 
     			@if($user->id == Auth::user()->id)

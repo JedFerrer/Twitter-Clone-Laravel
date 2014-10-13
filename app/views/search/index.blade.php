@@ -1,5 +1,9 @@
 @extends('layouts.plain') 
 
+@section('site-title')
+	{{$searchKeyValue}} - Twitter Clone Search
+@stop
+
 @section('main-content')
 
 	<div class="tweets-container">
